@@ -9,6 +9,7 @@
 	<title>Cadastro de produtos | IFPR</title>
 	
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+	<link href="<%= request.getContextPath() %>/assets/css/style.css" rel="stylesheet" type="text/css" />
 	
 </head>
 <body>
@@ -17,9 +18,8 @@
 <header>
     <div class="d-flex flex-column flex-md-row align-items-center pb-3 m-4 border-bottom">
             <a href="<%= request.getContextPath() %>" class="d-flex align-items-center text-dark text-decoration-none">
-        <span class="fs-4">Edição de produtos</span>
+        <span class="fs-4">Cadastro de produtos</span>
       </a>
-      
 
       <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 text-dark text-decoration-none" href="#">Features</a>
@@ -31,14 +31,15 @@
 
     <div class="pricing-header p-3 pb-md-4 mx-auto text-center">
       <h1 class="display-4 fw-normal">Tabela de Preços</h1>
-      <p class="fs-5 text-muted">Quickly build an effective pricing table for your potential customers with this Bootstrap example. It’s built with default Bootstrap components and utilities with little customization.</p>
     </div>
   </header>
+	
+	<h1>Cópia do arquivo de edição, necessita implementar cadastro.</h1>
 
 
 	<% Product product = (Product) request.getAttribute("product"); %>
 
-	<form action="<%= request.getContextPath() %>/products/edit" method="post">
+	<form action="<%= request.getContextPath() %>/products/edit" method="post" enctype="multipart/form-data">
 	
 		<div class="mb-3">
 		  <label for="id" class="form-label">#id</label>
@@ -57,7 +58,23 @@
 		
 		<div class="mb-3">
 		  <label for="formFile" class="form-label">Image</label>
-		  <input class="form-control" type="file" id="formFile">
+		  
+		  <div class="row img-upload-box">
+		  
+		  	<div class="col-3">
+		  	
+		  		<img width="30" src="<%= getServletContext().getContextPath() %>/public/<%= product.getImageUri() %>" alt="" />
+		  	
+		  	</div>
+		  	
+		  	<div class="col-9">
+		  	
+		  		<input class="form-control" name="field-image" type="file" id="formFile" value="<%= product.getImageUri() %>">
+		  		
+		  	</div>
+		  
+		  </div>
+		  
 		</div>
 		
 		<div class="mb-3">
